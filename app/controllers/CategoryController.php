@@ -1,6 +1,7 @@
 <?php
 require_once('app/config/database.php');
 require_once('app/models/CategoryModel.php');
+require_once('app/helpers/SessionHelper.php');
 
 class CategoryController
 {
@@ -27,6 +28,13 @@ class CategoryController
      */
     public function add()
     {
+        // Kiểm tra quyền admin
+        if (!SessionHelper::isAdmin()) {
+            echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
+            header('Refresh: 3; URL=/webbanhang/Category');
+            return;
+        }
+        
         include 'app/views/category/add.php';
     }
     
@@ -35,6 +43,13 @@ class CategoryController
      */
     public function save()
     {
+        // Kiểm tra quyền admin
+        if (!SessionHelper::isAdmin()) {
+            echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
+            header('Refresh: 3; URL=/webbanhang/Category');
+            return;
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /webbanhang/Category');
             return;
@@ -60,6 +75,13 @@ class CategoryController
      */
     public function edit($id)
     {
+        // Kiểm tra quyền admin
+        if (!SessionHelper::isAdmin()) {
+            echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
+            header('Refresh: 3; URL=/webbanhang/Category');
+            return;
+        }
+        
         $category = $this->categoryModel->getCategoryById($id);
         
         if (!$category) {
@@ -75,6 +97,13 @@ class CategoryController
      */
     public function update()
     {
+        // Kiểm tra quyền admin
+        if (!SessionHelper::isAdmin()) {
+            echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
+            header('Refresh: 3; URL=/webbanhang/Category');
+            return;
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /webbanhang/Category');
             return;
@@ -111,6 +140,13 @@ class CategoryController
      */
     public function delete($id)
     {
+        // Kiểm tra quyền admin
+        if (!SessionHelper::isAdmin()) {
+            echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
+            header('Refresh: 3; URL=/webbanhang/Category');
+            return;
+        }
+        
         $result = $this->categoryModel->deleteCategory($id);
         
         if ($result === true) {

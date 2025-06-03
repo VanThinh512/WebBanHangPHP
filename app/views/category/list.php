@@ -4,9 +4,11 @@
     <h1 class="page-title">Quản lý danh mục sản phẩm</h1>
     
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="/webbanhang/Category/add" class="btn btn-success">
-            <i class="fas fa-plus-circle mr-1"></i> Thêm danh mục mới
-        </a>
+        <?php if (SessionHelper::isAdmin()): ?>
+            <a href="/webbanhang/Category/add" class="btn btn-success">
+                <i class="fas fa-plus-circle mr-1"></i> Thêm danh mục mới
+            </a>
+        <?php endif; ?>
     </div>
     
     <?php if (empty($categories)): ?>
@@ -43,6 +45,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group">
+                                            <?php if (SessionHelper::isAdmin()): ?>
                                             <a href="/webbanhang/Category/edit/<?php echo $category->id; ?>" class="btn btn-sm btn-warning mr-1">
                                                 <i class="fas fa-edit"></i> Sửa
                                             </a>
@@ -51,6 +54,7 @@
                                                onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này? Các sản phẩm thuộc danh mục này sẽ không bị xóa.');">
                                                 <i class="fas fa-trash-alt"></i> Xóa
                                             </a>
+                                            <?php endif; ?>
                                         </div>
                                     </td>
                                 </tr>

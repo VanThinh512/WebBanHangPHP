@@ -3,8 +3,9 @@
     <h1 class="page-title">Danh sách sản phẩm</h1>
     
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="/webbanhang/Product/add" class="btn btn-success"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm mới</a>
-        
+        <?php if (SessionHelper::isAdmin()): ?>
+            <a href="/webbanhang/Product/add" class="btn btn-success"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm mới</a>
+        <?php endif; ?>
         <!-- Có thể thêm tính năng tìm kiếm ở đây sau này -->
     </div>
     
