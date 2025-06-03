@@ -64,14 +64,16 @@
                         </div>
                         
                         <div class="admin-actions mt-2">
-                            <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i> Sửa
-                            </a>
-                            <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" 
-                               class="btn btn-danger btn-sm" 
-                               onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
-                                <i class="fas fa-trash-alt"></i> Xóa
-                            </a>
+                            <?php if (SessionHelper::isAdmin()): ?>
+                                <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Sửa
+                                </a>
+                                <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" 
+                                class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                    <i class="fas fa-trash-alt"></i> Xóa
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

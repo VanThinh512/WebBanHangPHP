@@ -3,6 +3,7 @@
 require_once('app/config/database.php');
 require_once('app/models/ProductModel.php');
 require_once('app/models/CategoryModel.php');
+require_once 'app/helpers/SessionHelper.php';
 class ProductController
 {
     private $productModel;
@@ -12,11 +13,17 @@ class ProductController
         $this->db = (new Database())->getConnection();
         $this->productModel = new ProductModel($this->db);
     }
+    // Kiểm tra quyền Admin
+    private function isAdmin() {
+        return SessionHelper::isAdmin();
+    }
+    // Hiển thị danh sách sản phẩm (mở cho tất cả)
     public function index()
     {
         $products = $this->productModel->getProducts();
         include 'app/views/product/list.php';
     }
+    // Xem chi tiết sản phẩm (mở cho tất cả)
     public function show($id)
     {
         $product = $this->productModel->getProductById($id);
@@ -26,13 +33,23 @@ class ProductController
             echo "Không thấy sản phẩm.";
         }
     }
+    // Thêm sản phẩm (chỉ Admin)
     public function add()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $categories = (new CategoryModel($this->db))->getCategories();
         include_once 'app/views/product/add.php';
     }
+    // Lưu sản phẩm mới (chỉ Admin)
     public function save()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'] ?? '';
             $description = $_POST['description'] ?? '';
@@ -54,9 +71,13 @@ class ProductController
             }
         }
     }
-
+    // Sửa sản phẩm (chỉ Admin)
     public function edit($id)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $product = $this->productModel->getProductById($id);
         $categories = (new CategoryModel($this->db))->getCategories();
         if ($product) {
@@ -65,8 +86,13 @@ class ProductController
             echo "Không thấy sản phẩm.";
         }
     }
+    // Cập nhật sản phẩm (chỉ Admin)
     public function update()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $name = $_POST['name'];
@@ -86,8 +112,13 @@ class ProductController
             }
         }
     }
+    // Xóa sản phẩm (chỉ Admin)
     public function delete($id)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($this->productModel->deleteProduct($id)) {
             header('Location: /webbanhang/Product');
         } else {
@@ -96,6 +127,10 @@ class ProductController
     }
     private function uploadImage($file)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $target_dir = "uploads/";
         // Kiểm tra và tạo thư mục nếu chưa tồn tại
         if (!is_dir($target_dir)) {

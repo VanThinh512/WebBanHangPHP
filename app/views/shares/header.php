@@ -108,15 +108,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/webbanhang/Category/"><i class="fas fa-list mr-1"></i> Danh mục</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/webbanhang/Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
-                </li>
+                <?php if (SessionHelper::isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/webbanhang/Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <?php
                         if(SessionHelper::isLoggedIn()){
-                            echo "<a class='navlink'>".$_SESSION['username']."</a>";
-                            }
-                            else{
+                            echo "<a class='navlink'>".$_SESSION['username'] . " (" . SessionHelper::getRole() . ")</a>";
+                        }
+                        else{
                             echo "<a class='nav-link'href='/webbanhang/account/login'>Login</a>";
                         }
                         ?>
