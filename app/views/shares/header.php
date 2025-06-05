@@ -1,3 +1,7 @@
+<?php
+require_once 'app/models/AccountModel.php';
+require_once 'app/config/database.php';
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -108,15 +112,31 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/webbanhang/Category/"><i class="fas fa-list mr-1"></i> Danh mục</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/webbanhang/Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
-                </li>
+                <?php if (SessionHelper::isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/webbanhang/Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/webbanhang/account/manageUsers"><i class="fas fa-users-cog mr-1"></i> Quản lý người dùng</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <?php
                         if(SessionHelper::isLoggedIn()){
-                            echo "<a class='navlink'>".$_SESSION['username']."</a>";
+                            $username = $_SESSION['username'];
+                            $db = Database::getConnection();
+                            $accountModel = new AccountModel($db);
+                            $userInfo = $accountModel->getAccountByUsername($username);
+                            $avatarHtml = '';
+                            
+                            if (!empty($userInfo->avatar)) {
+                                $avatarUrl = '/webbanhang/' . $userInfo->avatar;
+                                $avatarHtml = "<img src='$avatarUrl' alt='Avatar' class='rounded-circle mr-1' style='width: 25px; height: 25px; object-fit: cover;'>";
                             }
-                            else{
+                            
+                            echo "<a class='nav-link d-flex align-items-center' href='/webbanhang/account/profile'>$avatarHtml ".$_SESSION['username'] . " (" . SessionHelper::getRole() . ")</a>";
+                        }
+                        else{
                             echo "<a class='nav-link'href='/webbanhang/account/login'>Login</a>";
                         }
                         ?>

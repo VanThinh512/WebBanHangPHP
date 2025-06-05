@@ -3,6 +3,7 @@
 require_once('app/config/database.php');
 require_once('app/models/ProductModel.php');
 require_once('app/models/CategoryModel.php');
+require_once 'app/helpers/SessionHelper.php';
 class ProductController
 {
     private $productModel;
@@ -12,11 +13,80 @@ class ProductController
         $this->db = (new Database())->getConnection();
         $this->productModel = new ProductModel($this->db);
     }
+    // Kiểm tra quyền Admin
+    private function isAdmin() {
+        return SessionHelper::isAdmin();
+    }
+    // Hiển thị danh sách sản phẩm (mở cho tất cả)
     public function index()
     {
-        $products = $this->productModel->getProducts();
+        // Lấy tham số tìm kiếm từ URL nếu có
+        $search = isset($_GET['search']) ? trim($_GET['search']) : null;
+        
+        // Lấy tham số lọc và sắp xếp từ URL
+        $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
+        $minPrice = isset($_GET['min_price']) && is_numeric($_GET['min_price']) ? (float)$_GET['min_price'] : null;
+        $maxPrice = isset($_GET['max_price']) && is_numeric($_GET['max_price']) ? (float)$_GET['max_price'] : null;
+        $sortBy = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'newest';
+        $sortOrder = isset($_GET['sort_order']) ? $_GET['sort_order'] : 'desc';
+        
+        // Cấu hình phân trang
+        $itemsPerPage = 8; // Số sản phẩm trên một trang
+        $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+        if ($currentPage < 1) $currentPage = 1;
+        
+        // Tính toán offset cho truy vấn
+        $offset = ($currentPage - 1) * $itemsPerPage;
+        
+        // Kiểm tra giá trị hợp lệ cho sortBy
+        $validSortFields = ['name', 'price', 'newest'];
+        if (!in_array($sortBy, $validSortFields)) {
+            $sortBy = 'newest';
+        }
+        
+        // Kiểm tra giá trị hợp lệ cho sortOrder
+        $validSortOrders = ['asc', 'desc'];
+        if (!in_array($sortOrder, $validSortOrders)) {
+            $sortOrder = 'desc';
+        }
+        
+        // Lấy danh sách danh mục để hiển thị trong form lọc
+        $categoryModel = new CategoryModel($this->db);
+        $categories = $categoryModel->getCategories();
+        
+        // Lấy tổng số sản phẩm để tính số trang
+        $totalProducts = $this->productModel->getTotalProducts($search, $categoryId, $minPrice, $maxPrice);
+        $totalPages = ceil($totalProducts / $itemsPerPage);
+        
+        // Đảm bảo trang hiện tại không vượt quá tổng số trang
+        if ($currentPage > $totalPages && $totalPages > 0) {
+            $currentPage = $totalPages;
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+        
+        // Lấy danh sách sản phẩm với các tùy chọn lọc, sắp xếp và phân trang
+        $products = $this->productModel->getProducts(
+            $search, 
+            $categoryId, 
+            $minPrice, 
+            $maxPrice, 
+            $sortBy, 
+            $sortOrder,
+            $itemsPerPage,
+            $offset
+        );
+        
+        // Truyền dữ liệu phân trang cho view
+        $pagination = [
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages,
+            'itemsPerPage' => $itemsPerPage,
+            'totalProducts' => $totalProducts
+        ];
+        
         include 'app/views/product/list.php';
     }
+    // Xem chi tiết sản phẩm (mở cho tất cả)
     public function show($id)
     {
         $product = $this->productModel->getProductById($id);
@@ -26,13 +96,23 @@ class ProductController
             echo "Không thấy sản phẩm.";
         }
     }
+    // Thêm sản phẩm (chỉ Admin)
     public function add()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $categories = (new CategoryModel($this->db))->getCategories();
         include_once 'app/views/product/add.php';
     }
+    // Lưu sản phẩm mới (chỉ Admin)
     public function save()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'] ?? '';
             $description = $_POST['description'] ?? '';
@@ -54,9 +134,13 @@ class ProductController
             }
         }
     }
-
+    // Sửa sản phẩm (chỉ Admin)
     public function edit($id)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $product = $this->productModel->getProductById($id);
         $categories = (new CategoryModel($this->db))->getCategories();
         if ($product) {
@@ -65,8 +149,13 @@ class ProductController
             echo "Không thấy sản phẩm.";
         }
     }
+    // Cập nhật sản phẩm (chỉ Admin)
     public function update()
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $name = $_POST['name'];
@@ -86,8 +175,13 @@ class ProductController
             }
         }
     }
+    // Xóa sản phẩm (chỉ Admin)
     public function delete($id)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         if ($this->productModel->deleteProduct($id)) {
             header('Location: /webbanhang/Product');
         } else {
@@ -96,6 +190,10 @@ class ProductController
     }
     private function uploadImage($file)
     {
+        if (!$this->isAdmin()) {
+            echo "Bạn không có quyền truy cập chức năng này!";
+            exit;
+        }
         $target_dir = "uploads/";
         // Kiểm tra và tạo thư mục nếu chưa tồn tại
         if (!is_dir($target_dir)) {
