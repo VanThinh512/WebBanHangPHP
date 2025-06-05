@@ -20,7 +20,70 @@ class ProductController
     // Hiển thị danh sách sản phẩm (mở cho tất cả)
     public function index()
     {
-        $products = $this->productModel->getProducts();
+        // Lấy tham số tìm kiếm từ URL nếu có
+        $search = isset($_GET['search']) ? trim($_GET['search']) : null;
+        
+        // Lấy tham số lọc và sắp xếp từ URL
+        $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
+        $minPrice = isset($_GET['min_price']) && is_numeric($_GET['min_price']) ? (float)$_GET['min_price'] : null;
+        $maxPrice = isset($_GET['max_price']) && is_numeric($_GET['max_price']) ? (float)$_GET['max_price'] : null;
+        $sortBy = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'newest';
+        $sortOrder = isset($_GET['sort_order']) ? $_GET['sort_order'] : 'desc';
+        
+        // Cấu hình phân trang
+        $itemsPerPage = 8; // Số sản phẩm trên một trang
+        $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+        if ($currentPage < 1) $currentPage = 1;
+        
+        // Tính toán offset cho truy vấn
+        $offset = ($currentPage - 1) * $itemsPerPage;
+        
+        // Kiểm tra giá trị hợp lệ cho sortBy
+        $validSortFields = ['name', 'price', 'newest'];
+        if (!in_array($sortBy, $validSortFields)) {
+            $sortBy = 'newest';
+        }
+        
+        // Kiểm tra giá trị hợp lệ cho sortOrder
+        $validSortOrders = ['asc', 'desc'];
+        if (!in_array($sortOrder, $validSortOrders)) {
+            $sortOrder = 'desc';
+        }
+        
+        // Lấy danh sách danh mục để hiển thị trong form lọc
+        $categoryModel = new CategoryModel($this->db);
+        $categories = $categoryModel->getCategories();
+        
+        // Lấy tổng số sản phẩm để tính số trang
+        $totalProducts = $this->productModel->getTotalProducts($search, $categoryId, $minPrice, $maxPrice);
+        $totalPages = ceil($totalProducts / $itemsPerPage);
+        
+        // Đảm bảo trang hiện tại không vượt quá tổng số trang
+        if ($currentPage > $totalPages && $totalPages > 0) {
+            $currentPage = $totalPages;
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+        
+        // Lấy danh sách sản phẩm với các tùy chọn lọc, sắp xếp và phân trang
+        $products = $this->productModel->getProducts(
+            $search, 
+            $categoryId, 
+            $minPrice, 
+            $maxPrice, 
+            $sortBy, 
+            $sortOrder,
+            $itemsPerPage,
+            $offset
+        );
+        
+        // Truyền dữ liệu phân trang cho view
+        $pagination = [
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages,
+            'itemsPerPage' => $itemsPerPage,
+            'totalProducts' => $totalProducts
+        ];
+        
         include 'app/views/product/list.php';
     }
     // Xem chi tiết sản phẩm (mở cho tất cả)
