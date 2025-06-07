@@ -42,12 +42,12 @@
         </div>
     </div>
     
-    <!-- Phần này sẽ hiển thị các sản phẩm thuộc danh mục này, nhưng sẽ cần bổ sung thêm code sau -->
+    <!-- Phần hiển thị sản phẩm thuộc danh mục này -->
     <div class="related-products mt-4">
         <h4 class="mb-3">Sản phẩm thuộc danh mục này</h4>
-        <div class="alert alert-info">
-            <i class="fas fa-info-circle mr-2"></i> Tính năng hiển thị sản phẩm theo danh mục sẽ được cập nhật sau.
-        </div>
+        <a href="/webbanhang/Product?category=<?php echo $category->id; ?>" class="btn btn-primary mb-3">
+            <i class="fas fa-shopping-bag mr-1"></i> Xem tất cả sản phẩm thuộc danh mục này
+        </a>
     </div>
 </div>
 
