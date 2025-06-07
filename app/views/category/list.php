@@ -30,10 +30,10 @@
                         </thead>
                         <tbody>
                             <?php foreach ($categories as $category): ?>
-                                <tr>
+                                <tr class="category-row" data-category-id="<?php echo $category->id; ?>" style="cursor: pointer;">
                                     <td class="pl-4"><?php echo $category->id; ?></td>
                                     <td>
-                                        <a href="/webbanhang/Category/show/<?php echo $category->id; ?>" class="category-name">
+                                        <a href="/webbanhang/Product?category=<?php echo $category->id; ?>" class="category-name">
                                             <?php echo htmlspecialchars($category->name, ENT_QUOTES, 'UTF-8'); ?>
                                         </a>
                                     </td>
@@ -51,7 +51,7 @@
                                             </a>
                                             <a href="/webbanhang/Category/delete/<?php echo $category->id; ?>" 
                                                class="btn btn-sm btn-danger" 
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này? Các sản phẩm thuộc danh mục này sẽ không bị xóa.');">
+                                               onclick="event.stopPropagation(); return confirm('Bạn có chắc chắn muốn xóa danh mục này? Các sản phẩm thuộc danh mục này sẽ không bị xóa.');">
                                                 <i class="fas fa-trash-alt"></i> Xóa
                                             </a>
                                             <?php endif; ?>
@@ -95,6 +95,31 @@
     .table-hover tbody tr:hover {
         background-color: rgba(0,123,255,0.05);
     }
+    
+    .category-row:hover {
+        background-color: rgba(0,123,255,0.1);
+    }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Thêm sự kiện click cho mỗi hàng danh mục
+        const categoryRows = document.querySelectorAll('.category-row');
+        categoryRows.forEach(row => {
+            row.addEventListener('click', function(e) {
+                // Ngăn chặn sự kiện click khi nhấp vào nút
+                if (e.target.closest('.btn-group')) {
+                    return;
+                }
+                
+                // Lấy ID danh mục từ thuộc tính data
+                const categoryId = this.getAttribute('data-category-id');
+                
+                // Chuyển hướng đến trang sản phẩm với bộ lọc danh mục
+                window.location.href = '/webbanhang/Product?category=' + categoryId;
+            });
+        });
+    });
+</script>
 
 <?php include 'app/views/shares/footer.php'; ?>

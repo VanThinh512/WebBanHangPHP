@@ -84,6 +84,10 @@ class ProductController
             'totalProducts' => $totalProducts
         ];
         
+        // Xác định xem có bộ lọc nào đang được áp dụng không
+        $hasFilter = !empty($search) || !empty($categoryId) || !empty($minPrice) || !empty($maxPrice) || 
+                    ($sortBy != 'newest') || ($sortOrder != 'desc');
+        
         include 'app/views/product/list.php';
     }
     // Xem chi tiết sản phẩm (mở cho tất cả)
