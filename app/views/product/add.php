@@ -38,3 +38,49 @@
     </form>
     <a href="/webbanhang/Product" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
 <?php include 'app/views/shares/footer.php'; ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('/webbanhang/api/category')
+        .then(response => response.json())
+        .then(data => {
+            const categorySelect = document.getElementById('category_id');
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        });
+        document.getElementById('add-product-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+            fetch('/webbanhang/api/product', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(text => {
+                console.log('Raw response:', text); // Log the raw response text
+                try {
+                    const data = text;
+                    if (data.message === 'Product created successfully') {
+                    location.href = '/webbanhang/Product';
+                    } else {
+                    alert('Thêm sản phẩm thất bại');
+                    }
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    alert('Lỗi: Không thể phân tích JSON từ phản hồi của máy chủ.');
+                }
+            });
+        });
+    });
+</script>
