@@ -5,7 +5,7 @@
     
     <div class="d-flex justify-content-between align-items-center mb-4">
         <?php if (SessionHelper::isAdmin()): ?>
-            <a href="/webbanhang/Category/add" class="btn btn-success">
+            <a href="<?php echo BASE_URL; ?>Category/add" class="btn btn-success">
                 <i class="fas fa-plus-circle mr-1"></i> Thêm danh mục mới
             </a>
         <?php endif; ?>
@@ -33,7 +33,7 @@
                                 <tr class="category-row" data-category-id="<?php echo $category->id; ?>" style="cursor: pointer;">
                                     <td class="pl-4"><?php echo $category->id; ?></td>
                                     <td>
-                                        <a href="/webbanhang/Product?category=<?php echo $category->id; ?>" class="category-name">
+                                        <a href="<?php echo BASE_URL; ?>Product?category=<?php echo $category->id; ?>" class="category-name">
                                             <?php echo htmlspecialchars($category->name, ENT_QUOTES, 'UTF-8'); ?>
                                         </a>
                                     </td>
@@ -46,10 +46,10 @@
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <?php if (SessionHelper::isAdmin()): ?>
-                                            <a href="/webbanhang/Category/edit/<?php echo $category->id; ?>" class="btn btn-sm btn-warning mr-1">
+                                            <a href="<?php echo BASE_URL; ?>Category/edit/<?php echo $category->id; ?>" class="btn btn-sm btn-warning mr-1">
                                                 <i class="fas fa-edit"></i> Sửa
                                             </a>
-                                            <a href="/webbanhang/Category/delete/<?php echo $category->id; ?>" 
+                                            <a href="<?php echo BASE_URL; ?>Category/delete/<?php echo $category->id; ?>" 
                                                class="btn btn-sm btn-danger" 
                                                onclick="event.stopPropagation(); return confirm('Bạn có chắc chắn muốn xóa danh mục này? Các sản phẩm thuộc danh mục này sẽ không bị xóa.');">
                                                 <i class="fas fa-trash-alt"></i> Xóa
@@ -116,7 +116,7 @@
                 const categoryId = this.getAttribute('data-category-id');
                 
                 // Chuyển hướng đến trang sản phẩm với bộ lọc danh mục
-                window.location.href = '/webbanhang/Product?category=' + categoryId;
+                window.location.href = '<?php echo BASE_URL; ?>Product?category=' + categoryId;
             });
         });
     });

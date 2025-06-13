@@ -13,16 +13,16 @@ $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 1;
                         <h1 class="display-4 font-weight-bold mb-3">Thông tin cá nhân</h1>
                         <p class="lead text-muted mb-4">Quản lý thông tin cá nhân và cập nhật tài khoản của bạn.</p>
                         <?php if (!$edit_mode): ?>
-                            <a href="/webbanhang/account/profile?edit=1" class="btn btn-primary btn-lg">
+                            <a href="<?php echo BASE_URL; ?>account/profile?edit=1" class="btn btn-primary btn-lg">
                                 <i class="fas fa-user-edit mr-2"></i> Chỉnh sửa thông tin
                             </a>
                         <?php endif; ?>
                     </div>
                     <div class="col-lg-4 text-center">
                         <?php if (!empty($account->avatar)): ?>
-                            <img src="/webbanhang/<?php echo $account->avatar; ?>" alt="Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 180px; height: 180px; object-fit: cover; border: 5px solid white;">
+                            <img src="<?php echo BASE_URL; ?><?php echo $account->avatar; ?>" alt="Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 180px; height: 180px; object-fit: cover; border: 5px solid white;">
                         <?php else: ?>
-                            <img src="/webbanhang/assets/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 180px; height: 180px; object-fit: cover; border: 5px solid white;">
+                            <img src="<?php echo BASE_URL; ?>public/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 180px; height: 180px; object-fit: cover; border: 5px solid white;">
                         <?php endif; ?>
                     </div>
                 </div>
@@ -37,9 +37,9 @@ $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 1;
                 <div class="card-body text-center">
                     <div class="py-3">
                         <?php if (!empty($account->avatar)): ?>
-                            <img src="/webbanhang/<?php echo $account->avatar; ?>" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa;">
+                            <img src="<?php echo BASE_URL; ?><?php echo $account->avatar; ?>" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa;">
                         <?php else: ?>
-                            <img src="/webbanhang/assets/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa;">
+                            <img src="<?php echo BASE_URL; ?>public/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa;">
                         <?php endif; ?>
                         <h5 class="card-title font-weight-bold"><?php echo $account->fullname; ?></h5>
                         <p class="card-text">
@@ -104,7 +104,7 @@ $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 1;
 
                     <?php if ($edit_mode): ?>
                         <!-- Form chỉnh sửa thông tin -->
-                        <form action="/webbanhang/account/updateProfile" method="POST" enctype="multipart/form-data">
+                        <form action="<?php echo BASE_URL; ?>account/updateProfile" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="username" class="form-label font-weight-bold">Tên đăng nhập</label>
@@ -185,7 +185,7 @@ $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 1;
                             </div>
                             
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="/webbanhang/account/profile" class="btn btn-outline-secondary">
+                                <a href="<?php echo BASE_URL; ?>account/profile" class="btn btn-outline-secondary">
                                     <i class="fas fa-times mr-2"></i> Hủy chỉnh sửa
                                 </a>
                                 <button type="submit" class="btn btn-primary">
@@ -238,10 +238,10 @@ $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 1;
                         </div>
                         
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="/webbanhang/product" class="btn btn-outline-secondary">
+                            <a href="<?php echo BASE_URL; ?>product" class="btn btn-outline-secondary">
                                 <i class="fas fa-arrow-left mr-2"></i> Quay lại
                             </a>
-                            <a href="/webbanhang/account/profile?edit=1" class="btn btn-primary">
+                            <a href="<?php echo BASE_URL; ?>account/profile?edit=1" class="btn btn-primary">
                                 <i class="fas fa-user-edit mr-2"></i> Chỉnh sửa thông tin
                             </a>
                         </div>

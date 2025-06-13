@@ -9,7 +9,7 @@
         </ul>
     </div>
 <?php endif; ?>
-<form method="POST" action="/webbanhang/Product/update" enctype="multipart/form-data" onsubmit="return validateForm();">
+<form method="POST" action="<?php echo BASE_URL; ?>Product/update" enctype="multipart/form-data" onsubmit="return validateForm();">
     <input type="hidden" name="id" value="<?php echo $product->id; ?>">
     <div class="form-group">
         <label for="name">Tên sản phẩm:</label>
@@ -39,10 +39,10 @@
         <input type="file" id="image" name="image" class="form-control">
         <input type="hidden" name="existing_image" value="<?php echo $product->image;?>">
         <?php if ($product->image): ?>
-            <img src="/webbanhang/<?php echo $product->image; ?>" alt="Product Image" style="max-width: 100px;">
+            <img src="<?php echo BASE_URL; ?><?php echo $product->image; ?>" alt="Product Image" style="max-width: 100px;">
         <?php endif; ?>
     </div>
     <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
 </form>
-<a href="/webbanhang/Product" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
+<a href="<?php echo BASE_URL; ?>Product" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
 <?php include 'app/views/shares/footer.php'; ?>

@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Thêm người dùng mới</h1>
-            <a href="/webbanhang/account/manageUsers" class="btn btn-secondary">
+            <a href="<?php echo BASE_URL; ?>account/manageUsers" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Quay lại danh sách
             </a>
         </div>
@@ -21,7 +21,7 @@
                 <i class="fas fa-user-plus"></i> Thông tin người dùng mới
             </div>
             <div class="card-body">
-                <form action="/webbanhang/account/saveUser" method="post" enctype="multipart/form-data">
+                <form action="<?php echo BASE_URL; ?>account/saveUser" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="username">Tên đăng nhập <span class="text-danger">*</span></label>
                         <div class="input-group">
@@ -147,7 +147,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Lưu
                         </button>
-                        <a href="/webbanhang/account/manageUsers" class="btn btn-secondary ml-2">
+                        <a href="<?php echo BASE_URL; ?>account/manageUsers" class="btn btn-secondary ml-2">
                             <i class="fas fa-times"></i> Hủy
                         </a>
                     </div>

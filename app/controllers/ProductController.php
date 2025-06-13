@@ -134,7 +134,7 @@ class ProductController
                 $categories = (new CategoryModel($this->db))->getCategories();
                 include 'app/views/product/add.php';
             } else {
-                header('Location: /webbanhang/Product');
+                header('Location: ' . BASE_URL . 'Product');
             }
         }
     }
@@ -173,7 +173,7 @@ class ProductController
             }
             $edit = $this->productModel->updateProduct($id, $name, $description, $price, $category_id, $image);
             if ($edit) {
-                header('Location: /webbanhang/Product');
+                header('Location: ' . BASE_URL . 'Product');
             } else {
                 echo "Đã xảy ra lỗi khi lưu sản phẩm.";
             }
@@ -187,7 +187,7 @@ class ProductController
             exit;
         }
         if ($this->productModel->deleteProduct($id)) {
-            header('Location: /webbanhang/Product');
+            header('Location: ' . BASE_URL . 'Product');
         } else {
             echo "Đã xảy ra lỗi khi xóa sản phẩm.";
         }
@@ -244,7 +244,7 @@ class ProductController
             'image' => $product->image
             ];
         }
-        header('Location: /webbanhang/Product/cart');
+        header('Location: ' . BASE_URL . 'Product/cart');
     }
     public function cart()
     {
@@ -268,7 +268,7 @@ class ProductController
             $_SESSION['cart'][$id]['quantity']++;
         }
         
-        header('Location: /webbanhang/Product/cart');
+        header('Location: ' . BASE_URL . 'Product/cart');
     }
     
     /**
@@ -285,7 +285,7 @@ class ProductController
             }
         }
         
-        header('Location: /webbanhang/Product/cart');
+        header('Location: ' . BASE_URL . 'Product/cart');
     }
     
     /**
@@ -307,7 +307,7 @@ class ProductController
             }
         }
         
-        header('Location: /webbanhang/Product/cart');
+        header('Location: ' . BASE_URL . 'Product/cart');
     }
     
     /**
@@ -319,7 +319,7 @@ class ProductController
             unset($_SESSION['cart'][$id]);
         }
         
-        header('Location: /webbanhang/Product/cart');
+        header('Location: ' . BASE_URL . 'Product/cart');
     }
     public function checkout()
     {
@@ -409,7 +409,7 @@ class ProductController
                 $this->db->commit();
                 
                 // Chuyển hướng đến trang xác nhận đơn hàng
-                header('Location: /webbanhang/Product/orderConfirmation');
+                header('Location: ' . BASE_URL . 'Product/orderConfirmation');
                 exit;
                 
             } catch (Exception $e) {

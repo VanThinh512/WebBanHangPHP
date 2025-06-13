@@ -9,7 +9,7 @@
             </ul>
         </div>
     <?php endif; ?>
-    <form method="POST" action="/webbanhang/Product/save" enctype="multipart/form-data" onsubmit="return validateForm();">
+    <form method="POST" action="<?php echo BASE_URL; ?>Product/save" enctype="multipart/form-data" onsubmit="return validateForm();">
         <div class="form-group">
             <label for="name">Tên sản phẩm:</label>
             <input type="text" id="name" name="name" class="form-control" required>
@@ -36,5 +36,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
     </form>
-    <a href="/webbanhang/Product" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
+    <a href="<?php echo BASE_URL; ?>Product" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
 <?php include 'app/views/shares/footer.php'; ?>

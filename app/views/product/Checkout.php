@@ -12,8 +12,8 @@ foreach ($cart as $item) {
 <div class="checkout-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-light py-2 px-3">
-            <li class="breadcrumb-item"><a href="/webbanhang/Product"><i class="fas fa-home"></i> Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="/webbanhang/Product/cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo BASE_URL; ?>Product"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo BASE_URL; ?>Product/cart"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
             <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
         </ol>
     </nav>
@@ -52,7 +52,7 @@ foreach ($cart as $item) {
                     <?php else: ?>
                         <div class="alert alert-warning mb-0">
                             <i class="fas fa-exclamation-triangle mr-2"></i> Giỏ hàng của bạn đang trống.
-                            <a href="/webbanhang/Product" class="alert-link">Tiếp tục mua sắm</a>
+                            <a href="<?php echo BASE_URL; ?>Product" class="alert-link">Tiếp tục mua sắm</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -66,7 +66,7 @@ foreach ($cart as $item) {
                     <h5 class="mb-0"><i class="fas fa-user mr-2"></i> Thông tin khách hàng</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/webbanhang/Product/processCheckout" class="checkout-form">
+                    <form method="POST" action="<?php echo BASE_URL; ?>Product/processCheckout" class="checkout-form">
                         <div class="form-group">
                             <label for="name">Họ tên <span class="text-danger">*</span></label>
                             <input type="text" id="name" name="name" class="form-control" required>
@@ -130,7 +130,7 @@ foreach ($cart as $item) {
                         </div>
                         
                         <div class="form-actions">
-                            <a href="/webbanhang/Product/cart" class="btn btn-secondary">
+                            <a href="<?php echo BASE_URL; ?>Product/cart" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left mr-1"></i> Quay lại giỏ hàng
                             </a>
                             <button type="submit" class="btn btn-primary btn-lg ml-2">

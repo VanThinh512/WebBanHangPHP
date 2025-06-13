@@ -3,7 +3,7 @@
 <div class="category-form-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-light py-2 px-3">
-            <li class="breadcrumb-item"><a href="/webbanhang/Category"><i class="fas fa-list"></i> Danh mục</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo BASE_URL; ?>Category"><i class="fas fa-list"></i> Danh mục</a></li>
             <li class="breadcrumb-item active" aria-current="page">Thêm danh mục mới</li>
         </ol>
     </nav>
@@ -22,7 +22,7 @@
     
     <div class="card">
         <div class="card-body">
-            <form action="/webbanhang/Category/save" method="POST">
+            <form action="<?php echo BASE_URL; ?>Category/save" method="POST">
                 <div class="form-group">
                     <label for="name">Tên danh mục <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="name" name="name" 
@@ -41,7 +41,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save mr-1"></i> Lưu danh mục
                     </button>
-                    <a href="/webbanhang/Category" class="btn btn-secondary ml-2">
+                    <a href="<?php echo BASE_URL; ?>Category" class="btn btn-secondary ml-2">
                         <i class="fas fa-arrow-left mr-1"></i> Quay lại
                     </a>
                 </div>

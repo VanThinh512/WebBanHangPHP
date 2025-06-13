@@ -6,7 +6,7 @@ $order = isset($_SESSION['last_order']) ? $_SESSION['last_order'] : null;
 
 // Nếu không có thông tin đơn hàng, chuyển hướng về trang sản phẩm
 if (!$order) {
-    header('Location: /webbanhang/Product');
+    header('Location: <?php echo BASE_URL; ?>Product');
     exit;
 }
 
@@ -151,7 +151,7 @@ $payment_method_text = isset($payment_methods[$order['payment_method']]) ? $paym
     
     <div class="next-actions text-center mt-4">
         <p>Chúng tôi đã gửi thông tin đơn hàng đến <?php echo htmlspecialchars($order['email'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <a href="/webbanhang/Product" class="btn btn-primary btn-lg">
+        <a href="<?php echo BASE_URL; ?>Product" class="btn btn-primary btn-lg">
             <i class="fas fa-store mr-2"></i> Tiếp tục mua sắm
         </a>
     </div>

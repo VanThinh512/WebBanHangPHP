@@ -12,7 +12,7 @@
             </div>
             <h3>Giỏ hàng của bạn đang trống</h3>
             <p>Hãy thêm sản phẩm vào giỏ hàng để tiến hành mua sắm.</p>
-            <a href="/webbanhang/Product" class="btn btn-primary btn-lg mt-3">
+            <a href="<?php echo BASE_URL; ?>Product" class="btn btn-primary btn-lg mt-3">
                 <i class="fas fa-store mr-2"></i> Tiếp tục mua sắm
             </a>
         </div>
@@ -37,7 +37,7 @@
                                     <!-- Ảnh sản phẩm -->
                                     <td class="text-center">
                                         <?php if ($item['image']): ?>
-                                            <img src="/webbanhang/<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8'); ?>" class="cart-product-image">
+                                            <img src="<?php echo BASE_URL; ?><?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8'); ?>" class="cart-product-image">
                                         <?php else: ?>
                                             <div class="no-image-placeholder-small">
                                                 <i class="fas fa-image"></i>
@@ -47,7 +47,7 @@
                                     
                                     <!-- Tên sản phẩm -->
                                     <td>
-                                        <a href="/webbanhang/Product/show/<?php echo $id; ?>" class="product-name">
+                                        <a href="<?php echo BASE_URL; ?>Product/show/<?php echo $id; ?>" class="product-name">
                                             <?php echo htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8'); ?>
                                         </a>
                                     </td>
@@ -60,16 +60,16 @@
                                     <!-- Số lượng -->
                                     <td>
                                         <div class="quantity-control">
-                                            <a href="/webbanhang/Product/decreaseQuantity/<?php echo $id; ?>" class="quantity-btn decrease">
+                                            <a href="<?php echo BASE_URL; ?>Product/decreaseQuantity/<?php echo $id; ?>" class="quantity-btn decrease">
                                                 <i class="fas fa-minus"></i>
                                             </a>
                                             
-                                            <form action="/webbanhang/Product/updateQuantity" method="POST" class="quantity-form">
+                                            <form action="<?php echo BASE_URL; ?>Product/updateQuantity" method="POST" class="quantity-form">
                                                 <input type="hidden" name="product_id" value="<?php echo $id; ?>">
                                                 <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" class="quantity-input" onchange="this.form.submit()">
                                             </form>
                                             
-                                            <a href="/webbanhang/Product/increaseQuantity/<?php echo $id; ?>" class="quantity-btn increase">
+                                            <a href="<?php echo BASE_URL; ?>Product/increaseQuantity/<?php echo $id; ?>" class="quantity-btn increase">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -82,7 +82,7 @@
                                     
                                     <!-- Xóa -->
                                     <td class="text-center">
-                                        <a href="/webbanhang/Product/removeFromCart/<?php echo $id; ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?');">
+                                        <a href="<?php echo BASE_URL; ?>Product/removeFromCart/<?php echo $id; ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?');">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -104,10 +104,10 @@
         </div>
         
         <div class="cart-actions mt-4 d-flex justify-content-between">
-            <a href="/webbanhang/Product" class="btn btn-secondary">
+            <a href="<?php echo BASE_URL; ?>Product" class="btn btn-secondary">
                 <i class="fas fa-arrow-left mr-1"></i> Tiếp tục mua sắm
             </a>
-            <a href="/webbanhang/Product/checkout" class="btn btn-primary btn-lg">
+            <a href="<?php echo BASE_URL; ?>Product/checkout" class="btn btn-primary btn-lg">
                 <i class="fas fa-check-circle mr-1"></i> Tiến hành thanh toán
             </a>
         </div>

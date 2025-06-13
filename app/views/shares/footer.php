@@ -16,8 +16,8 @@
             <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
                 <h6 class="text-uppercase mb-4">Danh mục</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="/webbanhang/Product" class="footer-link">Tất cả sản phẩm</a></li>
-                    <li class="mb-2"><a href="/webbanhang/Category" class="footer-link">Danh mục</a></li>
+                    <li class="mb-2"><a href="<?php echo BASE_URL; ?>Product" class="footer-link">Tất cả sản phẩm</a></li>
+                    <li class="mb-2"><a href="<?php echo BASE_URL; ?>Category" class="footer-link">Danh mục</a></li>
                     <li class="mb-2"><a href="#" class="footer-link">Sản phẩm mới</a></li>
                     <li class="mb-2"><a href="#" class="footer-link">Khuyến mãi</a></li>
                 </ul>
@@ -25,9 +25,9 @@
             <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
                 <h6 class="text-uppercase mb-4">Tài khoản</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="/webbanhang/account/login" class="footer-link">Đăng nhập</a></li>
-                    <li class="mb-2"><a href="/webbanhang/account/profile" class="footer-link">Tài khoản của tôi</a></li>
-                    <li class="mb-2"><a href="/webbanhang/Product/cart" class="footer-link">Giỏ hàng</a></li>
+                    <li class="mb-2"><a href="<?php echo BASE_URL; ?>account/login" class="footer-link">Đăng nhập</a></li>
+                    <li class="mb-2"><a href="<?php echo BASE_URL; ?>account/profile" class="footer-link">Tài khoản của tôi</a></li>
+                    <li class="mb-2"><a href="<?php echo BASE_URL; ?>Product/cart" class="footer-link">Giỏ hàng</a></li>
                     <li class="mb-2"><a href="#" class="footer-link">Lịch sử đơn hàng</a></li>
                 </ul>
             </div>

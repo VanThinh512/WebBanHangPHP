@@ -12,13 +12,13 @@
                                 <h1 class="display-4 font-weight-bold mb-3">Đăng nhập</h1>
                                 <p class="lead text-muted mb-4">Đăng nhập để truy cập tài khoản và quản lý thông tin cá nhân của bạn.</p>
                                 <div class="d-flex">
-                                    <a href="/webbanhang/account/register" class="btn btn-outline-primary btn-lg">
+                                    <a href="<?php echo BASE_URL; ?>account/register" class="btn btn-outline-primary btn-lg">
                                         <i class="fas fa-user-plus mr-2"></i> Đăng ký tài khoản mới
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-4 text-center">
-                                <img src="/webbanhang/public/images/login-illustration.svg" alt="Login" class="img-fluid" onerror="this.src='/webbanhang/public/images/login.png'; this.onerror='';"> 
+                                <img src="<?php echo BASE_URL; ?>public/images/login-illustration.svg" alt="Login" class="img-fluid" onerror="this.src='<?php echo BASE_URL; ?>public/images/login.png'; this.onerror='';"> 
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                 </div>
                             <?php endif; ?>
                             
-                            <form action="/webbanhang/account/checklogin" method="post">
+                            <form action="<?php echo BASE_URL; ?>account/checklogin" method="post">
                                 <div class="mb-4">
                                     <label for="username" class="form-label font-weight-bold">Tên đăng nhập</label>
                                     <div class="input-group">
@@ -95,7 +95,7 @@
                             </form>
                         </div>
                         <div class="card-footer bg-white text-center py-3">
-                            <p class="mb-0">Chưa có tài khoản? <a href="/webbanhang/account/register" class="font-weight-bold">Đăng ký ngay</a></p>
+                            <p class="mb-0">Chưa có tài khoản? <a href="<?php echo BASE_URL; ?>account/register" class="font-weight-bold">Đăng ký ngay</a></p>
                         </div>
                     </div>
                 </div>

@@ -24,10 +24,10 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Quản lý người dùng</h1>
             <div>
-                <a href="/webbanhang/account/addUser" class="btn btn-success">
+                <a href="<?php echo BASE_URL; ?>account/addUser" class="btn btn-success">
                     <i class="fas fa-user-plus"></i> Thêm người dùng
                 </a>
-                <a href="/webbanhang/product" class="btn btn-secondary ml-2">
+                <a href="<?php echo BASE_URL; ?>product" class="btn btn-secondary ml-2">
                     <i class="fas fa-home"></i> Trang chủ
                 </a>
             </div>
@@ -66,12 +66,8 @@
                                         </span>
                                     </td>
                                     <td class="text-center action-buttons">
-                                        <a href="/webbanhang/account/editUser/<?= $account->id ?>" class="btn btn-sm btn-info" title="Sửa">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" onclick="confirmDelete(<?= $account->id ?>, '<?= htmlspecialchars($account->username) ?>')" class="btn btn-sm btn-danger" title="Xóa">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
+<a href="<?php echo BASE_URL; ?>account/editUser?id=<?= $account->id ?>" class="btn btn-sm btn-primary">
+<a href="<?php echo BASE_URL; ?>account/deleteUser?id=<?= $account->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -110,7 +106,7 @@
     <script>
         function confirmDelete(id, username) {
             document.getElementById('delete-username').textContent = username;
-            document.getElementById('confirm-delete').href = '/webbanhang/account/deleteUser/' + id;
+            document.getElementById('confirm-delete').href = '<?php echo BASE_URL; ?>account/deleteUser/' + id;
             $('#deleteModal').modal('show');
         }
     </script>

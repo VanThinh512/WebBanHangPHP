@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Chỉnh sửa người dùng</h1>
-            <a href="/webbanhang/account/manageUsers" class="btn btn-secondary">
+            <a href="<?php echo BASE_URL; ?>account/manageUsers" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Quay lại danh sách
             </a>
         </div>
@@ -21,7 +21,7 @@
                 <i class="fas fa-user-edit"></i> Thông tin người dùng: <?= htmlspecialchars($account->username) ?>
             </div>
             <div class="card-body">
-                <form action="/webbanhang/account/updateUser" method="post" enctype="multipart/form-data">
+                <form action="<?php echo BASE_URL; ?>account/updateUser" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $account->id ?>">
                     
                     <div class="form-group">
@@ -109,7 +109,7 @@
                         <label for="avatar">Ảnh đại diện</label>
                         <?php if (!empty($account->avatar)): ?>
                             <div class="mb-2">
-                                <img src="/webbanhang/<?= htmlspecialchars($account->avatar) ?>" alt="Avatar" 
+                                <img src="<?php echo BASE_URL; ?><?= htmlspecialchars($account->avatar) ?>" alt="Avatar" 
                                     class="img-thumbnail" style="max-width: 100px;">
                             </div>
                         <?php endif; ?>
@@ -152,7 +152,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Lưu thay đổi
                         </button>
-                        <a href="/webbanhang/account/manageUsers" class="btn btn-secondary ml-2">
+                        <a href="<?php echo BASE_URL; ?>account/manageUsers" class="btn btn-secondary ml-2">
                             <i class="fas fa-times"></i> Hủy
                         </a>
                     </div>

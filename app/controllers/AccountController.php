@@ -25,7 +25,7 @@ class AccountController {
      */
     public function profile() {
         if (!SessionHelper::isLoggedIn()) {
-            header('Location: /webbanhang/account/login');
+            header('Location: ' . BASE_URL . 'account/login');
             exit;
         }
 
@@ -34,7 +34,7 @@ class AccountController {
 
         if (!$account) {
             echo '<div class="alert alert-danger">Không thể tải thông tin tài khoản!</div>';
-            header('Refresh: 3; URL=/webbanhang/product');
+            header('Refresh: 3; URL=' . BASE_URL . 'product');
             return;
         }
 
@@ -46,7 +46,7 @@ class AccountController {
      */
     public function updateProfile() {
         if (!SessionHelper::isLoggedIn()) {
-            header('Location: /webbanhang/account/login');
+            header('Location: ' . BASE_URL . 'account/login');
             exit;
         }
 
@@ -56,7 +56,7 @@ class AccountController {
 
             if (!$account) {
                 echo '<div class="alert alert-danger">Không thể tải thông tin tài khoản!</div>';
-                header('Refresh: 3; URL=/webbanhang/product');
+                header('Refresh: 3; URL=' . BASE_URL . 'product');
                 return;
             }
 
@@ -104,7 +104,7 @@ class AccountController {
                 $result = $this->accountModel->updateAccount($account->id, $fullName, $account->role, $password, $email, $phone, $avatarPath);
 
                 if ($result === true) {
-                    header('Location: /webbanhang/account/profile?success=1');
+                    header('Location: ' . BASE_URL . 'account/profile?success=1');
                     exit;
                 } else {
                     $errors['update'] = $result['error'] ?? "Có lỗi xảy ra khi cập nhật!";
@@ -159,7 +159,7 @@ class AccountController {
             } else {
                 $result = $this->accountModel->save($username, $fullName, $password, 'user', $email, $phone, $avatarPath);
                 if ($result) {
-                    header('Location: /webbanhang/account/login');
+                    header('Location: ' . BASE_URL . 'account/login');
                     exit;
                 }
             }
@@ -170,7 +170,7 @@ class AccountController {
         session_start();
         unset($_SESSION['username']);
         unset($_SESSION['role']);
-        header('Location: /webbanhang/product');
+        header('Location: ' . BASE_URL . 'product');
         exit;
     }
 
@@ -185,7 +185,7 @@ class AccountController {
                     $_SESSION['username'] = $account->username;
                     $_SESSION['role'] = $account->role;
                 }
-                header('Location: /webbanhang/product');
+                header('Location: ' . BASE_URL . 'product');
                 exit;
             } else {
                 $error = $account ? "Mật khẩu không đúng!" : "Không tìm thấy tài khoản!";
@@ -202,7 +202,7 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/product');
+            header('Refresh: 3; URL=' . BASE_URL . 'product');
             return;
         }
 
@@ -217,7 +217,7 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
@@ -231,7 +231,7 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
@@ -281,7 +281,7 @@ class AccountController {
             } else {
                 $result = $this->accountModel->save($username, $fullName, $password, $role, $email, $phone, $avatarPath);
                 if ($result) {
-                    header('Location: /webbanhang/account/manageUsers');
+                    header('Location: ' . BASE_URL . 'account/manageUsers');
                     exit;
                 }
             }
@@ -295,14 +295,14 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
         $account = $this->accountModel->getAccountById($id);
         if (!$account) {
             echo '<div class="alert alert-danger">Không tìm thấy người dùng!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
@@ -316,7 +316,7 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
@@ -352,7 +352,7 @@ class AccountController {
             $account = $this->accountModel->getAccountById($id);
             if (!$account) {
                 echo '<div class="alert alert-danger">Không tìm thấy tài khoản!</div>';
-                header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+                header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
                 return;
             }
 
@@ -377,7 +377,7 @@ class AccountController {
                 $result = $this->accountModel->updateAccount($id, $fullName, $role, $password, $email, $phone, $avatarPath);
 
                 if ($result === true) {
-                    header('Location: /webbanhang/account/manageUsers');
+                    header('Location: ' . BASE_URL . 'account/manageUsers');
                     exit;
                 } else {
                     $errors['update'] = $result['error'] ?? "Có lỗi xảy ra khi cập nhật!";
@@ -394,18 +394,18 @@ class AccountController {
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
             return;
         }
 
         $result = $this->accountModel->deleteAccount($id);
 
         if ($result === true) {
-            header('Location: /webbanhang/account/manageUsers');
+            header('Location: ' . BASE_URL . 'account/manageUsers');
             exit;
         } else {
             echo '<div class="alert alert-danger">Lỗi: ' . $result . '</div>';
-            header('Refresh: 3; URL=/webbanhang/account/manageUsers');
+            header('Refresh: 3; URL=' . BASE_URL . 'account/manageUsers');
         }
     }
 
@@ -416,7 +416,7 @@ class AccountController {
         $admin = $this->accountModel->getAccountByUsername('admin');
         if ($admin) {
             echo '<div class="alert alert-success">Tài khoản admin đã tồn tại!</div>';
-            echo '<a href="/webbanhang/account/login">Đăng nhập</a>';
+            echo '<a href="' . BASE_URL . 'account/login">Đăng nhập</a>';
             return;
         }
 
@@ -433,7 +433,7 @@ class AccountController {
             echo '<div class="alert alert-success">Tài khoản admin đã được tạo thành công!</div>';
             echo '<p>Username: admin</p>';
             echo '<p>Password: admin123</p>';
-            echo '<p><a href="/webbanhang/account/login">Đăng nhập</a></p>';
+            echo '<p><a href="' . BASE_URL . 'account/login">Đăng nhập</a></p>';
         } else {
             echo '<div class="alert alert-danger">Có lỗi xảy ra khi tạo tài khoản admin!</div>';
         }

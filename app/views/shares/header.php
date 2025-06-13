@@ -287,7 +287,7 @@ require_once 'app/config/database.php';
 <body>
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="/webbanhang/Product">Zoe<span>Mart</span></a>
+        <a class="navbar-brand" href="<?php echo BASE_URL; ?>Product">Zoe<span>Mart</span></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -296,17 +296,17 @@ require_once 'app/config/database.php';
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/Product') !== false && strpos($_SERVER['REQUEST_URI'], '/Product/add') === false) ? 'active' : ''; ?>" href="/webbanhang/Product/"><i class="fas fa-store mr-1"></i> Sản phẩm</a>
+                    <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/Product') !== false && strpos($_SERVER['REQUEST_URI'], '/Product/add') === false) ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>Product/"><i class="fas fa-store mr-1"></i> Sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/Category') !== false ? 'active' : ''; ?>" href="/webbanhang/Category/"><i class="fas fa-list mr-1"></i> Danh mục</a>
+                    <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/Category') !== false ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>Category/"><i class="fas fa-list mr-1"></i> Danh mục</a>
                 </li>
                 <?php if (SessionHelper::isAdmin()): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/Product/add') !== false ? 'active' : ''; ?>" href="/webbanhang/Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
+                        <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/Product/add') !== false ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>Product/add"><i class="fas fa-plus-circle mr-1"></i> Thêm sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/account/manageUsers') !== false ? 'active' : ''; ?>" href="/webbanhang/account/manageUsers"><i class="fas fa-users-cog mr-1"></i> Quản lý người dùng</a>
+                        <a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], '/account/manageUsers') !== false ? 'active' : ''; ?>" href="<?php echo BASE_URL; ?>account/manageUsers"><i class="fas fa-users-cog mr-1"></i> Quản lý người dùng</a>
                     </li>
                 <?php endif; ?>
             </ul>
@@ -322,7 +322,7 @@ require_once 'app/config/database.php';
                                 $userInfo = $accountModel->getAccountByUsername($username);
                                 
                                 if (!empty($userInfo->avatar)) {
-                                    $avatarUrl = '/webbanhang/' . $userInfo->avatar;
+                                    $avatarUrl = BASE_URL . $userInfo->avatar;
                                     echo "<img src='$avatarUrl' alt='Avatar' class='user-avatar mr-2'>";
                                 } else {
                                     echo "<i class='fas fa-user-circle mr-2' style='font-size: 1.5rem; color: var(--primary-color);'></i>";
@@ -336,21 +336,21 @@ require_once 'app/config/database.php';
                                 <i class="fas fa-user-tag mr-1"></i> <?php echo SessionHelper::getRole(); ?>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/webbanhang/account/profile">
+                            <a class="dropdown-item" href="<?php echo BASE_URL; ?>account/profile">
                                 <i class="fas fa-user-circle mr-1"></i> Hồ sơ
                             </a>
-                            <a class="dropdown-item" href="/webbanhang/account/logout">
+                            <a class="dropdown-item" href="<?php echo BASE_URL; ?>account/logout">
                                 <i class="fas fa-sign-out-alt mr-1"></i> Đăng xuất
                             </a>
                         </div>
                     </div>
                 <?php else: ?>
-                    <a class="btn btn-outline-primary mr-2" href="/webbanhang/account/login">
+                    <a class="btn btn-outline-primary mr-2" href="<?php echo BASE_URL; ?>account/login">
                         <i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập
                     </a>
                 <?php endif; ?>
                 
-                <a href="/webbanhang/Product/cart" class="cart-icon">
+                <a href="<?php echo BASE_URL; ?>Product/cart" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <?php 
                     $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;

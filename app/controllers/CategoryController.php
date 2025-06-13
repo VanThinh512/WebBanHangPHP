@@ -31,7 +31,7 @@ class CategoryController
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/Category');
+            header('Refresh: 3; URL=' . BASE_URL . 'Category');
             return;
         }
         
@@ -46,12 +46,12 @@ class CategoryController
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/Category');
+            header('Refresh: 3; URL=' . BASE_URL . 'Category');
             return;
         }
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /webbanhang/Category');
+            header('Location: ' . BASE_URL . 'category');
             return;
         }
         
@@ -66,7 +66,7 @@ class CategoryController
             include 'app/views/category/add.php';
         } else {
             // Thêm thành công
-            header('Location: /webbanhang/Category');
+            header('Location: ' . BASE_URL . 'category');
         }
     }
     
@@ -78,7 +78,7 @@ class CategoryController
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/Category');
+            header('Refresh: 3; URL=' . BASE_URL . 'Category');
             return;
         }
         
@@ -100,12 +100,12 @@ class CategoryController
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/Category');
+            header('Refresh: 3; URL=' . BASE_URL . 'Category');
             return;
         }
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /webbanhang/Category');
+            header('Location: ' . BASE_URL . 'category');
             return;
         }
         
@@ -131,7 +131,7 @@ class CategoryController
             include 'app/views/category/edit.php';
         } else {
             // Cập nhật thành công
-            header('Location: /webbanhang/Category');
+            header('Location: ' . BASE_URL . 'Category');
         }
     }
     
@@ -143,7 +143,7 @@ class CategoryController
         // Kiểm tra quyền admin
         if (!SessionHelper::isAdmin()) {
             echo '<div class="alert alert-danger">Bạn không có quyền thực hiện chức năng này!</div>';
-            header('Refresh: 3; URL=/webbanhang/Category');
+            header('Refresh: 3; URL=' . BASE_URL . 'Category');
             return;
         }
         
@@ -151,7 +151,7 @@ class CategoryController
         
         if ($result === true) {
             // Xóa thành công
-            header('Location: /webbanhang/Category');
+            header('Location: ' . BASE_URL . 'Category');
         } else {
             // Xóa thất bại hoặc có lỗi
             echo $result; // Hiển thị thông báo lỗi

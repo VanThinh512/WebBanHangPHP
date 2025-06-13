@@ -12,14 +12,14 @@
                         <i class="fas fa-shopping-bag mr-2"></i> Mua sắm ngay
                     </a>
                     <?php if (SessionHelper::isAdmin()): ?>
-                        <a href="/webbanhang/Product/add" class="btn btn-outline-primary btn-lg">
+                        <a href="<?php echo BASE_URL; ?>Product/add" class="btn btn-outline-primary btn-lg">
                             <i class="fas fa-plus-circle mr-2"></i> Thêm sản phẩm
                         </a>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="/WEBBANHANG/uploads/avatars/thinh1_1748938690.jpg" alt="Hero Image" class="img-fluid rounded shadow-lg">
+                <img src="<?php echo BASE_URL; ?>public/images/hero-image.jpg" alt="Hero Image" class="img-fluid rounded shadow-lg">
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
             <div class="card-body p-4">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-3 mb-lg-0">
-                        <form action="/webbanhang/Product" method="GET" class="search-form">
+                        <form action="<?php echo BASE_URL; ?>Product" method="GET" class="search-form">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-white border-right-0">
@@ -111,7 +111,7 @@
                             </span>
                         <?php endif; ?>
                         
-                        <a href="/webbanhang/Product" class="btn btn-sm btn-outline-secondary ml-auto">
+                        <a href="<?php echo BASE_URL; ?>Product" class="btn btn-sm btn-outline-secondary ml-auto">
                             <i class="fas fa-times mr-1"></i> Xóa tất cả
                         </a>
                     </div>
@@ -121,7 +121,7 @@
                 <!-- Advanced Filter Collapse -->
                 <div class="collapse <?php echo $hasFilter ? 'show' : ''; ?>" id="filterCollapse">
                     <hr>
-                    <form action="/webbanhang/Product" method="GET" class="filter-form">
+                    <form action="<?php echo BASE_URL; ?>Product" method="GET" class="filter-form">
                         <!-- Giữ lại giá trị tìm kiếm nếu có -->
                         <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
                             <input type="hidden" name="search" value="<?php echo htmlspecialchars($_GET['search']); ?>">
@@ -194,7 +194,7 @@
                             <button type="submit" class="btn btn-primary px-4">
                                 <i class="fas fa-filter mr-2"></i> Áp dụng bộ lọc
                             </button>
-                            <a href="/webbanhang/Product" class="btn btn-outline-secondary ml-2">
+                            <a href="<?php echo BASE_URL; ?>Product" class="btn btn-outline-secondary ml-2">
                                 <i class="fas fa-times mr-2"></i> Xóa bộ lọc
                             </a>
                         </div>
@@ -224,7 +224,7 @@
                         <div class="card product-card h-100 shadow-sm">
                             <div class="product-image-container">
                                 <?php if ($product->image): ?>
-                                    <img src="/webbanhang/<?php echo $product->image; ?>" class="card-img-top product-image" alt="<?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <img src="<?php echo BASE_URL; ?><?php echo $product->image; ?>" class="card-img-top product-image" alt="<?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php else: ?>
                                     <div class="no-image-placeholder">
                                         <i class="fas fa-image"></i>
@@ -232,14 +232,14 @@
                                 <?php endif; ?>
                                 <div class="product-overlay">
                                     <div class="product-actions">
-                                        <a href="/webbanhang/Product/show/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Xem chi tiết">
+                                        <a href="<?php echo BASE_URL; ?>Product/show/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Xem chi tiết">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="/webbanhang/Product/addToCart/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Thêm vào giỏ">
+                                        <a href="<?php echo BASE_URL; ?>Product/addToCart/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Thêm vào giỏ">
                                             <i class="fas fa-cart-plus"></i>
                                         </a>
                                         <?php if (SessionHelper::isAdmin()): ?>
-                                            <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Sửa sản phẩm">
+                                            <a href="<?php echo BASE_URL; ?>Product/edit/<?php echo $product->id; ?>" class="btn btn-light btn-sm rounded-circle" title="Sửa sản phẩm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         <?php endif; ?>
@@ -253,7 +253,7 @@
                                 </div>
                                 
                                 <h5 class="card-title">
-                                    <a href="/webbanhang/Product/show/<?php echo $product->id; ?>" class="product-title">
+                                    <a href="<?php echo BASE_URL; ?>Product/show/<?php echo $product->id; ?>" class="product-title">
                                         <?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?>
                                     </a>
                                 </h5>
@@ -271,7 +271,7 @@
                                     <?php echo number_format($product->price, 0, ',', '.'); ?> VND
                                 </div>
                                 
-                                <a href="/webbanhang/Product/addToCart/<?php echo $product->id; ?>" class="btn btn-primary btn-sm">
+                                <a href="<?php echo BASE_URL; ?>Product/addToCart/<?php echo $product->id; ?>" class="btn btn-primary btn-sm">
                                     <i class="fas fa-cart-plus mr-1"></i> Thêm vào giỏ
                                 </a>
                             </div>
@@ -279,10 +279,10 @@
                             <?php if (SessionHelper::isAdmin()): ?>
                                 <div class="admin-actions p-2 bg-light border-top">
                                     <div class="d-flex justify-content-between">
-                                        <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-sm">
+                                        <a href="<?php echo BASE_URL; ?>Product/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i> Sửa
                                         </a>
-                                        <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" 
+                                        <a href="<?php echo BASE_URL; ?>Product/delete/<?php echo $product->id; ?>" 
                                         class="btn btn-danger btn-sm" 
                                         onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
                                             <i class="fas fa-trash-alt"></i> Xóa
@@ -315,7 +315,7 @@
                     if (isset($_GET['sort_order'])) $prevPageUrl .= '&sort_order=' . $_GET['sort_order'];
                 ?>
                 <li class="page-item">
-                    <a class="page-link" href="/webbanhang/Product<?php echo $prevPageUrl; ?>" aria-label="Trang trước">
+                    <a class="page-link" href="<?php echo BASE_URL; ?>Product<?php echo $prevPageUrl; ?>" aria-label="Trang trước">
                         <i class="fas fa-chevron-left"></i>
                         <span class="sr-only">Trước</span>
                     </a>
@@ -347,7 +347,7 @@
                     if (isset($_GET['sort_order'])) $pageUrl .= '&sort_order=' . $_GET['sort_order'];
                 ?>
                 <li class="page-item <?php echo ($i == $pagination['currentPage']) ? 'active' : ''; ?>">
-                    <a class="page-link" href="/webbanhang/Product<?php echo $pageUrl; ?>"><?php echo $i; ?></a>
+                    <a class="page-link" href="<?php echo BASE_URL; ?>Product<?php echo $pageUrl; ?>"><?php echo $i; ?></a>
                 </li>
                 <?php endfor; ?>
                 
@@ -364,7 +364,7 @@
                     if (isset($_GET['sort_order'])) $nextPageUrl .= '&sort_order=' . $_GET['sort_order'];
                 ?>
                 <li class="page-item">
-                    <a class="page-link" href="/webbanhang/Product<?php echo $nextPageUrl; ?>" aria-label="Trang tiếp">
+                    <a class="page-link" href="<?php echo BASE_URL; ?>Product<?php echo $nextPageUrl; ?>" aria-label="Trang tiếp">
                         <i class="fas fa-chevron-right"></i>
                         <span class="sr-only">Tiếp</span>
                     </a>

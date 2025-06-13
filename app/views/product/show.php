@@ -3,7 +3,7 @@
 <div class="product-detail-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-light py-2 px-3">
-            <li class="breadcrumb-item"><a href="/webbanhang/Product"><i class="fas fa-home"></i> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo BASE_URL; ?>Product"><i class="fas fa-home"></i> Trang chủ</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?></li>
         </ol>
     </nav>
@@ -13,7 +13,7 @@
         <div class="col-md-5 mb-4">
             <div class="product-image-gallery">
                 <?php if ($product->image): ?>
-                    <img src="/webbanhang/<?php echo $product->image; ?>" alt="<?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?>" class="img-fluid main-product-image">
+                    <img src="<?php echo BASE_URL; ?><?php echo $product->image; ?>" alt="<?php echo htmlspecialchars($product->name, ENT_QUOTES, 'UTF-8'); ?>" class="img-fluid main-product-image">
                 <?php else: ?>
                     <div class="no-image-placeholder">
                         <i class="fas fa-image"></i>
@@ -43,19 +43,19 @@
                 </div>
                 
                 <div class="product-actions mt-4">
-                    <a href="/webbanhang/Product/addToCart/<?php echo $product->id; ?>" class="btn btn-primary btn-lg add-to-cart-btn">
+                    <a href="<?php echo BASE_URL; ?>Product/addToCart/<?php echo $product->id; ?>" class="btn btn-primary btn-lg add-to-cart-btn">
                         <i class="fas fa-cart-plus mr-2"></i> Thêm vào giỏ hàng
                     </a>
-                    <a href="/webbanhang/Product" class="btn btn-outline-secondary btn-lg ml-2">
+                    <a href="<?php echo BASE_URL; ?>Product" class="btn btn-outline-secondary btn-lg ml-2">
                         <i class="fas fa-arrow-left mr-2"></i> Quay lại
                     </a>
                 </div>
                 
                 <div class="admin-actions mt-4">
-                    <a href="/webbanhang/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning">
+                    <a href="<?php echo BASE_URL; ?>Product/edit/<?php echo $product->id; ?>" class="btn btn-warning">
                         <i class="fas fa-edit mr-1"></i> Sửa sản phẩm
                     </a>
-                    <a href="/webbanhang/Product/delete/<?php echo $product->id; ?>" class="btn btn-danger" 
+                    <a href="<?php echo BASE_URL; ?>Product/delete/<?php echo $product->id; ?>" class="btn btn-danger" 
                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
                         <i class="fas fa-trash-alt mr-1"></i> Xóa sản phẩm
                     </a>

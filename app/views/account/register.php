@@ -10,7 +10,7 @@ if (isset($errors)) {
 ?>
 <div class="card-body p-5 text-center">
     <h2 class="mb-4">Đăng ký tài khoản</h2>
-    <form class="user" action="/webbanhang/account/save" method="post" enctype="multipart/form-data">
+    <form class="user" action="<?php echo BASE_URL; ?>account/save" method="post" enctype="multipart/form-data">
         <div class="form-group row mb-3">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="username" class="form-label">Tên đăng nhập <span class="text-danger">*</span></label>
@@ -57,7 +57,7 @@ if (isset($errors)) {
                 Đăng ký
             </button>
             <div class="mt-3">
-                <a href="/webbanhang/account/login" class="text-decoration-none">Đã có tài khoản? Đăng nhập ngay</a>
+                <a href="<?php echo BASE_URL; ?>account/login" class="text-decoration-none">Đã có tài khoản? Đăng nhập ngay</a>
             </div>
         </div>
     </form>
