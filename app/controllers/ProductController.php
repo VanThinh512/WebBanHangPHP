@@ -88,7 +88,7 @@ class ProductController
         $hasFilter = !empty($search) || !empty($categoryId) || !empty($minPrice) || !empty($maxPrice) || 
                     ($sortBy != 'newest') || ($sortOrder != 'desc');
         
-        include 'app/views/product/list.php';
+        include BASE_PATH . '/app/views/product/list.php';
     }
     // Xem chi tiết sản phẩm (mở cho tất cả)
     public function show($id)
