@@ -1,5 +1,0 @@
--- Thêm các cột mới vào bảng account
-ALTER TABLE account
-ADD COLUMN email VARCHAR(100) DEFAULT NULL,
-ADD COLUMN phone VARCHAR(20) DEFAULT NULL,
-ADD COLUMN avatar VARCHAR(255) DEFAULT NULL;
